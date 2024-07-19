@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>调查问卷系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div id="welcome">
+            <h1>欢迎来到我们的研究平台！</h1>
+            <p>我们邀请您参与我们的研究，探讨中国 Z 世代消费者对可持续产品和常规产品的偏好和行为。您的见解将对我们理解可持续性如何影响购买决策做出重大贡献，并有助于塑造可持续设计的未来。</p>
+            <button onclick="showSection('basic-info')">开始</button>
+        </div>
+
+        <div id="basic-info" style="display: none;">
+            <h2>填写基本信息</h2>
+            <form id="basic-info-form">
+                <label>年龄：
+                    <select name="age">
+                        <option value="18岁以下">18岁以下</option>
+                        <option value="18-24">18-24</option>
+                        <option value="25-34">25-34</option>
+                        <option value="35-44">35-44</option>
+                        <option value="45-54">45-54</option>
+                        <option value="55岁及以上">55岁及以上</option>
+                    </select>
+                </label><br>
+
+                <label>性别：
+                    <select name="gender">
+                        <option value="男性">男性</option>
+                        <option value="女性">女性</option>
+                        <option value="非二元性别/第三性别">非二元性别/第三性别</option>
+                        <option value="不想说">不想说</option>
+                    </select>
+                </label><br>
+
+                <label>国家：
+                    <input type="text" name="country">
+                </label><br>
+
+                <button type="button" onclick="submitBasicInfo()">提交</button>
+            </form>
+        </div>
+
+        <div id="consent" style="display: none;">
+            <h2>隐私和同意</h2>
+            <p>通过本次调查收集的数据将专门用于学术研究，作为消费者对可持续产品和常规产品的偏好研究的一部分。收集的信息将有助于了解人口统计学对消费者行为和偏好的影响。</p>
+            <button onclick="submitConsent(true)">同意并继续</button>
+            <button onclick="submitConsent(false)">不同意并退出</button>
+        </div>
+
+        <div id="survey" style="display: none; align-self: flex-start;" >
+            <h2>调查问卷</h2>
+            <form id="survey-form">
+                <label>您选择的是哪个产品类别？
+                    <select name="productType">
+                        <option value="常规产品">常规产品</option>
+                        <option value="可持续产品">可持续产品</option>
+                    </select>
+                </label><br>
+
+                <label>为什么您喜欢这个类别？（选择所有适用项）
+                    <select name="preferenceReason" multiple style="height: 164px;">
+                        <option value="价格">价格</option>
+                        <option value="质量">质量</option>
+                        <option value="环境影响">环境影响</option>
+                        <option value="朋友推荐">朋友推荐</option>
+                        <option value="品牌声誉">品牌声誉</option>
+                        <option value="可用性">可用性</option>
+                        <option value="设计/美学">设计/美学</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </label><br>
+
+                <label>您多久购买一次此类别的产品？
+                    <select name="purchaseFrequency">
+                        <option value="总是">总是</option>
+                        <option value="经常">经常</option>
+                        <option value="有时">有时</option>
+                        <option value="很少">很少</option>
+                        <option value="绝不">绝不</option>
+                    </select>
+                </label><br>
+
+                <label>价格：
+                    <select name="importancePrice">
+                        <option value="很重要">很重要</option>
+                        <option value="重要的">重要的</option>
+                        <option value="中性的">中性的</option>
+                        <option value="不重要">不重要</option>
+                        <option value="非常不重要">非常不重要</option>
+                    </select>
+                </label><br>
+
+                <label>质量：
+                    <select name="importanceQuality">
+                        <option value="很重要">很重要</option>
+                        <option value="重要的">重要的</option>
+                        <option value="中性的">中性的</option>
+                        <option value="不重要">不重要</option>
+                        <option value="非常不重要">非常不重要</option>
+                    </select>
+                </label><br>
+
+                <label>对环境造成的影响：
+                    <select name="importanceEnvironment">
+                        <option value="很重要">很重要</option>
+                        <option value="重要的">重要的</option>
+                        <option value="中性的">中性的</option>
+                        <option value="不重要">不重要</option>
+                        <option value="非常不重要">非常不重要</option>
+                    </select>
+                </label><br>
+
+                <label>品牌声誉：
+                    <select name="importanceBrand">
+                        <option value="很重要">很重要</option>
+                        <option value="重要的">重要的</option>
+                        <option value="中性的">中性的</option>
+                        <option value="不重要">不重要</option>
+                        <option value="非常不重要">非常不重要</option>
+                    </select>
+                </label><br>
+
+                <label>设计/美学：
+                    <select name="importanceDesign">
+                        <option value="很重要">很重要</option>
+                        <option value="重要的">重要的</option>
+                        <option value="中性的">中性的</option>
+                        <option value="不重要">不重要</option>
+                        <option value="非常不重要">非常不重要</option>
+                    </select>
+                </label><br>
+
+                <label>您是否认为可持续产品从长远来看更物有所值？
+                    <select name="longTermValue">
+                        <option value="非常同意">非常同意</option>
+                        <option value="同意">同意</option>
+                        <option value="中性的">中性的</option>
+                        <option value="不同意">不同意</option>
+                        <option value="强烈反对">强烈反对</option>
+                    </select>
+                </label><br>
+
+                <label>您愿意向您的朋友和家人推荐此类产品吗？
+                    <select name="recommendFriends">
+                        <option value="是的">是的</option>
+                        <option value="不">不</option>
+                    </select>
+                </label><br>
+
+                <button type="button" onclick="submitSurvey()">提交</button>
+            </form>
+        </div>
+
+        <div id="thank-you" style="display: none;">
+            <h2>感谢您的参与！</h2>
+            <p>我们真诚地感谢您花时间和精力参与我们关于消费者对可持续产品和常规产品的偏好的研究。您的意见非常宝贵，有助于我们了解消费者行为的趋势和影响，尤其是年轻一代的消费者行为。</p>
+            <p>
+                本研究的重要性：<br />
+                您的参与有助于促进可持续实践和了解消费者偏好的重要学术研究。从这项研究中获得的见解将有助于制定更好的策略来鼓励可持续消费，这对我们的环境和社会至关重要。
+            </p>
+            <p>
+                保持知情：<br />
+                如果您对本研究结果或未来更新感兴趣，请随时联系我们。我们致力于实现更加可持续的未来，您的反馈和持续支持将受到高度重视。
+            </p>
+            <p>
+                联系信息：<br />
+                电子邮件：yj2025@hw.ac.uk<br />
+                电话：07387847449<br />
+                再次感谢您的贡献！
+            </p>
+
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
